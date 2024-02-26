@@ -1,0 +1,59 @@
+
+
+public class RandomNumberGenerator {
+    
+    public static void main(String[] args) {
+        int[] numbers = generateRandomNumbers(1000000);
+        
+        // Count prime and non-prime numbers
+        int[] primeAndNonPrimeCount = countPrimeAndNonPrime(numbers);
+        int primeCount = primeAndNonPrimeCount[0];
+        int nonPrimeCount = primeAndNonPrimeCount[1];
+        
+        System.out.println("Number of prime numbers: " + primeCount);
+        System.out.println("Number of non-prime numbers: " + nonPrimeCount);
+    }
+    
+    // Method to generate 7-digit random numbers
+    public static int[] generateRandomNumbers(int count) {
+        Random rand = new Random();
+        int[] numbers = new int[count];
+        
+        for (int i = 0; i < count; i++) {
+            int randomNumber = 1000000 + rand.nextInt(9000000);
+            numbers[i] = randomNumber;
+        }
+        
+        return numbers;
+    }
+    
+    
+    public static int[] countPrimeAndNonPrime(int[] numbers) {
+        int primeCount = 0;
+        int nonPrimeCount = 0;
+        
+        for (int number : numbers) {
+            if (isPrime(number)) {
+                primeCount++;
+            } else {
+                nonPrimeCount++;
+            }
+        }
+        
+        return new int[] {primeCount, nonPrimeCount};
+    }
+    
+   
+    public static boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
